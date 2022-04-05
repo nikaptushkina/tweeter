@@ -19,9 +19,41 @@ body {
   background-color: #f4f1ec;
   font-size: 24px;
   font-family: "Source Sans Pro", sans-serif;
-  margin-top: 120px;
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+ nav {
+  height: 120px;
+  background-color: #4056A1;
+  color: #FFFFFF;
+  padding: 0 1.5em;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav button {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  color: #FFFFFF;
+}
+
+.containerButton, .containerLogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+nav span {
+  font-family:'Bungee', cursive;
+  transform: translateY(50%);
+  font-size: 36px;
+}
+
+.fa-solid.fa-angles-down {
+  text-align: center;
+  color: red;
+}
