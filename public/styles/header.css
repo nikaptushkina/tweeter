@@ -10,7 +10,7 @@ header {
   background-image: url("/images/header-background.png");
 }
 
-h2 {
+.name {
   transform: translateY(-100%);
   color: #f4f1ec;
-}
+} 
