@@ -66,3 +66,8 @@ textarea {
   color: #545149;
   font-size: 1.25em;
 } 
+
+.error {
+  display: none;
+  border: 3px solid red
+} 
