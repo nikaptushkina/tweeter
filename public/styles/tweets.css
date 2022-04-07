@@ -10,7 +10,7 @@
 }
 
 .tweetHeader {
-  background-color: transparent;
+  background-color: #f4f1ec;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
