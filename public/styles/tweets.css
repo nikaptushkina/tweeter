@@ -33,3 +33,13 @@ article.tweet footer {
 article.tweet i:hover {
   color: #4056A1;
 }
+
+#avatar1 {
+  max-width: 120%;
+  max-height: 120%;
+ }
+
+.nameImage {
+  display: flex;
+  flex-direction: row;
+}
