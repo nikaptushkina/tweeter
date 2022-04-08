@@ -14,14 +14,14 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  margin-top: 5px;
+  margin-top: 10px;
   height: 40px;
 }
 
 article.tweet p {
-  height: 40px;
-  margin-top: 20px;
+  margin-top: 25px;
   border-bottom: 3px solid darkgray;
+  font-size: 100%;
 }
 
 article.tweet footer {

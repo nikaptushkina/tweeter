@@ -22,11 +22,36 @@ body {
   padding-top: 120px;
 }
 
+.lessBold {
+  font-weight: 400;
+}
+
 main {
   width: 90%;
   margin: 0 auto;
   background-color: transparent;
   margin-bottom: 30px;
+}
+
+@media only screen and (min-width: 768px) {
+
+  body {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .profileHeader {
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-top: 15vw;
+    max-width: 40%;
+  }
+
+  .container {
+    margin: 1vw;
+    margin-top: 5vw;
+  }
+
 }
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions

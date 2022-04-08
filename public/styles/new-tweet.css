@@ -1,6 +1,7 @@
 .new-tweet {
   margin: 0 auto;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .tweet-form {
