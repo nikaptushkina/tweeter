@@ -67,7 +67,9 @@ textarea {
   font-size: 1.25em;
 } 
 
-.error {
+#emptyMessage, #tooLong {
   display: none;
-  border: 3px solid red
+  border: 2px solid red;
+  text-align: center;
+  margin: 0.5em 0em;
 } 
