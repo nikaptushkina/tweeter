@@ -1,8 +1,19 @@
 # Tweeter Project
 
-Tweeter is a simple, single-page Twitter clone.
+Tweeter is a simple, single-page Twitter clone. It is made using JQuery, HTML, CSS, and AJAX. Tweets are rendered dynamically and the design is responsive no matter what the screen size may be!
 
-This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express back-end skills.
+I hope you enjoy exploring this Tweeter app!
+
+## Final Product
+
+!["Main Screen"](https://github.com/nikaptushkina/tweeter/blob/master/docs/main-page.png)
+This is the main screen displaying your profile and recent tweets!
+
+!["Responsive design - tablet view"](https://github.com/nikaptushkina/tweeter/blob/master/docs/responsive-design.png)
+Responsive design in tablet view!
+
+!["Error Messages"](https://github.com/nikaptushkina/tweeter/blob/master/docs/error-message.png)
+Error messages are easily displayed when user enters too many characters or if the text field is empty.
 
 ## Getting Started
 
@@ -14,5 +25,7 @@ This repository is the starter code for the project: Students will fork and clon
 
 ## Dependencies
 
+- body-parser
+- chance
 - Express
 - Node 5.10.x or above
