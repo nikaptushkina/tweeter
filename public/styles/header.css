@@ -14,3 +14,7 @@ header {
   transform: translateY(-100%);
   color: #f4f1ec;
 } 
+
+.initialImage {
+  margin-top: 80px;
+}

@@ -1,38 +1,30 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
-
-
 const tweetData = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": "https://i.imgur.com/73hZDYK.png",
-        "handle": "@SirIsaac"
-      },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1648427048474
+  {
+    "user": {
+      "name": "Newton",
+      "avatars": "https://i.imgur.com/73hZDYK.png",
+      "handle": "@SirIsaac"
     },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": "https://i.imgur.com/nlhLi3I.png",
-        "handle": "@rd"
-      },
-      "content": {
-        "text": "Je pense, donc je suis"
-      },
-      "created_at": 1648513448474
-    }
-]
+    "content": {
+      "text": "If I have seen further it is by standing on the shoulders of giants"
+    },
+    "created_at": 1648427048474
+  },
+  {
+    "user": {
+      "name": "Descartes",
+      "avatars": "https://i.imgur.com/nlhLi3I.png",
+      "handle": "@rd"
+    },
+    "content": {
+      "text": "Je pense, donc je suis"
+    },
+    "created_at": 1648513448474
+  }
+];
 
 const createTweetElement = (data) => {
-  const escape = function (str) {
+  const escape = function(str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
@@ -66,17 +58,16 @@ const createTweetElement = (data) => {
         `;
 
   return html;
-}
+};
 
 const renderTweets = (data) => {
   const $tweetComponent = $('#tweets-container');
-  // $tweetComponent.empty();
 
-  for(const user of data) {
+  for (const user of data) {
     const $tweet = createTweetElement(user);
     $tweetComponent.prepend($tweet);
   }
-}
+};
 
 const loadTweets = () => {
   $.ajax({
@@ -100,7 +91,7 @@ $(document).ready(function() {
 
   loadTweets();
 
-  $(".tweet-form").submit(function(e){
+  $(".tweet-form").submit(function(e) {
     e.preventDefault();
     $("#emptyMessage").slideUp();
     $("#tooLong").slideUp();
@@ -121,18 +112,12 @@ $(document).ready(function() {
       return;
     }
 
-    // $.post('/tweets/', serializedTweet, response => {
-    //   $(".tweet-form").trigger("reset");
-    //   $(".counter").text('140');
-    //   loadTweets();
-    // })
     $.ajax("/tweets/", {method: "POST", data: serializedTweet})
-      .then(function(){
+      .then(function() {
         //empty the container to avoid duplicate messages
         $("#tweets-container").empty();
         loadTweets();
         $(".tweet-form").trigger("reset");
-    })
+      });
   });
-  //renderTweets(tweetData);
 });

@@ -10,5 +10,5 @@ $(document).ready(function() {
     } else {
       $("output[name='counter']").css({color: '#545149'});
     }
-  })
+  });
 });
