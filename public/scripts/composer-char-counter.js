@@ -3,10 +3,12 @@ $(document).ready(function() {
     const charCount = $('#tweet-text').val().length;
     const sum = 140 - charCount;
 
+    $("output[name='counter']").val(sum);
+
     if (sum < 0) {
-      $("output[name='counter']").val(sum).css({color: 'red'});
+      $("output[name='counter']").css({color: 'red'});
     } else {
-      $("output[name='counter']").val(sum);
+      $("output[name='counter']").css({color: '#545149'});
     }
   })
 });
