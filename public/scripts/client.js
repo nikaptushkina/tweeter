@@ -4,6 +4,8 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+
+
 const tweetData = [
     {
       "user": {
@@ -23,37 +25,46 @@ const tweetData = [
         "handle": "@rd"
       },
       "content": {
-        "text": "Je pense , donc je suis"
+        "text": "Je pense, donc je suis"
       },
       "created_at": 1648513448474
     }
 ]
 
 const createTweetElement = (data) => {
-  const $handle = $('<span>').text(data.user.handle);
-  const $name = $('<div class="tweetHeader"><span>').text(data.user.name);
-  const $content = $('<p>').text(data.content.text);
-  const $time = $('<footer><div>').text(`${timeago.format(data["created_at"])}`);
-  const $icons = $('<div>').append('<i class="fa-solid fa-flag"></i>', '<i class="fa-solid fa-retweet"></i>', '<i class="fa-solid fa-heart"></i>');
-  
-  // handle in same header as name
-  $name.append($handle)
-  // icons in same footer as time
-  $time.append($icons);
-  
+  const name = data.user.name;
+  const handle = data.user.handle;
+  const avatar = data.user.avatars;
+  const time = timeago.format(data.created_at);
+  const content = data.content.text;
 
-  const $tweet = $('<article class="tweet">');
+  const html = `
+  <article class="tweet">
+          <div class="tweetHeader">
+            <div class="nameImage">
+              <image id="avatar1" src="${avatar}"></image>
+              <span>${name}</span>
+            </div> 
+            <span>${handle}</span>
+          </div>
+          <p>${content}</p>
+          <footer>
+            <div>${time}</div>
+            <div>
+              <i class="fa-solid fa-flag"></i>
+              <i class="fa-solid fa-retweet"></i>
+              <i class="fa-solid fa-heart"></i>
+            </div>
+          </footer>
+        </article>
+        `;
 
-  $tweet.append($name, $content, $time);
-
-  return $tweet;
-
+  return html;
 }
 
 const renderTweets = (data) => {
   const $tweetComponent = $('#tweets-container');
-  console.log('tweet:', $tweetComponent);
-  $tweetComponent.empty();
+  // $tweetComponent.empty();
 
   for(const user of data) {
     const $tweet = createTweetElement(user);
@@ -61,40 +72,61 @@ const renderTweets = (data) => {
   }
 }
 
+const loadTweets = () => {
+  $.ajax({
+    url: '/tweets/',
+    method: 'GET',
+    dataType: 'json',
+    success: (tweets) => {
+      renderTweets(tweets);
+    },
+    error: (err) => {
+      console.log("error:", err);
+    }
+  });
+};
 
 $(document).ready(function() {
-  const loadTweet = () => {
-    $.ajax({
-      url: '/tweets',
-      method: 'GET',
-      dataType: 'json',
-      success: (tweets) => {
-        console.log("tweets:", tweets);
-        renderTweets(tweets);
-      },
-      error: (err) => {
-        console.log("error:", err);
-      }
-    });
-  };
+  $("#emptyMessage").hide();
+  $("#tooLong").hide();
 
-  loadTweet();
+  $("#tweets-container").empty();
 
-  $("#submitTweet").submit(function(e){
+  loadTweets();
+
+  $(".tweet-form").submit(function(e){
     e.preventDefault();
+    $("#emptyMessage").slideUp();
+    $("#tooLong").slideUp();
 
-    const serializedTweet = $(e.target).serialize();
+    const serializedTweet = $(".tweet-form").serialize();
+
+    console.log("******$$$", serializedTweet);
 
     if (serializedTweet.slice(5) === "") {
-      return window.alert("Can't post an empty tweet!");
+      $("#emptyMessage").slideDown();
+      $(".tweet-form").trigger("reset");
+      return;
     }
 
     if (serializedTweet.slice(5).length > 140) {
-      return window.alert("Your tweet is too long!")
+      $("#tooLong").slideDown();
+      $(".tweet-form").trigger("reset");
+      return;
     }
 
-    $.post('/tweets', serializedTweet, response => {
+    // $.post('/tweets/', serializedTweet, response => {
+    //   $(".tweet-form").trigger("reset");
+    //   $(".counter").text('140');
+    //   loadTweets();
+    // })
+    $.ajax("/tweets/", {method: "POST", data: serializedTweet})
+      .then(function(){
+        //empty the container to avoid duplicate messages
+        $("#tweets-container").empty();
+        loadTweets();
+        $(".tweet-form").trigger("reset");
     })
   });
-  renderTweets(tweetData);
+  //renderTweets(tweetData);
 });
