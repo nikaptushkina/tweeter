@@ -32,6 +32,12 @@ const tweetData = [
 ]
 
 const createTweetElement = (data) => {
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
   const name = data.user.name;
   const handle = data.user.handle;
   const avatar = data.user.avatars;
@@ -42,14 +48,14 @@ const createTweetElement = (data) => {
   <article class="tweet">
           <div class="tweetHeader">
             <div class="nameImage">
-              <image id="avatar1" src="${avatar}"></image>
-              <span>${name}</span>
+              <image id="avatar1" src="${escape(avatar)}"></image>
+              <span>${escape(name)}</span>
             </div> 
-            <span>${handle}</span>
+            <span>${escape(handle)}</span>
           </div>
-          <p>${content}</p>
+          <p>${escape(content)}</p>
           <footer>
-            <div>${time}</div>
+            <div>${escape(time)}</div>
             <div>
               <i class="fa-solid fa-flag"></i>
               <i class="fa-solid fa-retweet"></i>
